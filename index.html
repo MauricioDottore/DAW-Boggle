@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Boggle</h1>
+        <div class="controls">
+            <button id="start-btn">Iniciar Juego</button>
+            <label for="time-select">Tiempo:</label>
+            <select id="time-select">
+                <option value="1">1 minuto</option>
+                <option value="2">2 minutos</option>
+                <option value="3">3 minutos</option>
+            </select>
+        </div>
+        <div id="timer">Tiempo restante: 00:00</div>
+        <div class="grid">
+            <!-- Casillas de la cuadrícula de 4x4 -->
+            <div class="cell" id="cell-0"></div>
+            <div class="cell" id="cell-1"></div>
+            <div class="cell" id="cell-2"></div>
+            <div class="cell" id="cell-3"></div>
+            <div class="cell" id="cell-4"></div>
+            <div class="cell" id="cell-5"></div>
+            <div class="cell" id="cell-6"></div>
+            <div class="cell" id="cell-7"></div>
+            <div class="cell" id="cell-8"></div>
+            <div class="cell" id="cell-9"></div>
+            <div class="cell" id="cell-10"></div>
+            <div class="cell" id="cell-11"></div>
+            <div class="cell" id="cell-12"></div>
+            <div class="cell" id="cell-13"></div>
+            <div class="cell" id="cell-14"></div>
+            <div class="cell" id="cell-15"></div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="word-input" placeholder="Ingrese palabra">
+            <button id="submit-word">Enviar Palabra</button>
+        </div>
+        <div class="scoreboard">
+            <h2>Palabras Encontradas</h2>
+            <ul id="word-list"></ul>
+            <h3>Puntuación: <span id="score">0</span></h3>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

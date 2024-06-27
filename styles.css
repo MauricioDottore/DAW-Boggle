@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    grid-gap: 5px;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.controls, .input-area {
+    margin: 10px 0;
+}
+
+#word-input {
+    width: 200px;
+    padding: 5px;
+}
+
+.scoreboard {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+#timer {
+    font-size: 24px;
+    margin: 10px 0;
+}
