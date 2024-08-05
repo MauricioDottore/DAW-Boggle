@@ -1,22 +1,39 @@
+/* Estilos globales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
 }
 
 .container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #282828;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
+h1 {
+    margin-bottom: 20px;
+    font-size: 36px;
+    color: #ffeb3b;
+}
+
+/* Estilos de la cuadrícula */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 60px);
-    grid-gap: 5px;
-    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 260px; /* 4 * 65px (ancho de cada celda) */
+    margin-bottom: 20px;
+    gap: 5px; /* Espacio entre celdas */
 }
 
 .cell {
@@ -25,35 +42,209 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: #444;
+    border-radius: 8px;
     font-size: 24px;
     font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, border 0.3s;
 }
 
-.controls, .input-area {
-    margin: 10px 0;
+.cell.selected {
+    background-color: #ffeb3b;
+    color: #333;
+    transform: scale(1.1);
 }
 
-#word-input {
-    width: 200px;
-    padding: 5px;
+.cell.last-selected {
+    border: 2px solid #ff5722; /* Borde diferente para la última celda seleccionada */
 }
 
-.scoreboard {
+.cell.can-select {
+    background-color: #666;
+    transform: scale(1.05);
+}
+
+/* Estilos del temporizador y puntaje */
+#timer {
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #444;
+    border-radius: 5px;
+}
+
+#score {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Estilos del formulario y botones */
+input, select, button {
+    background-color: #444;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+button:hover {
+    background-color: #ff5722;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #e64a19;
+}
+
+/* Estilos del mensaje */
+.message {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.message.info {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.message.warning {
+    background-color: #FFC107;
+    color: #333;
+}
+
+.message.error {
+    background-color: #F44336;
+    color: #fff;
+}
+
+/* Estilos del ranking modal */
+#ranking-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#ranking-content {
+    background-color: #282828;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    color: #e0e0e0;
+    position: relative;
+}
+
+#ranking-table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-ul {
-    list-style-type: none;
+#ranking-table th, #ranking-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+#ranking-table th {
+    background-color: #444;
+}
+
+#ranking-table tr:nth-child(even) {
+    background-color: #555;
+}
+
+#ranking-table tr:hover {
+    background-color: #666;
+}
+
+#close-ranking {
+    background-color: #ff5722;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#close-ranking:hover {
+    background-color: #e64a19;
+}
+
+/* Estilos para el contenedor de mensajes */
+.message-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #444;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+.message-container.show {
+    display: block;
+}
+
+/* Estilos de la sección de palabras encontradas */
+.scoreboard {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.scoreboard h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #ffeb3b;
+}
+
+.scoreboard ul {
+    list-style: none;
     padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-li {
+.scoreboard li {
+    background-color: #444;
     margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-#timer {
-    font-size: 24px;
-    margin: 10px 0;
+.scoreboard li:hover {
+    background-color: #555;
 }

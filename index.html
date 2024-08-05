@@ -10,13 +10,15 @@
     <div class="container">
         <h1>Boggle</h1>
         <div class="controls">
-            <button id="start-btn">Iniciar Juego</button>
+            <label for="player-name">Nombre:</label>
+            <input type="text" id="player-name" placeholder="Ingresa tu nombre" />
             <label for="time-select">Tiempo:</label>
             <select id="time-select">
                 <option value="1">1 minuto</option>
                 <option value="2">2 minutos</option>
                 <option value="3">3 minutos</option>
             </select>
+            <button id="start-btn">Iniciar Juego</button>
         </div>
         <div id="timer">Tiempo restante: 00:00</div>
         <div class="grid">
@@ -39,7 +41,7 @@
             <div class="cell" id="cell-15"></div>
         </div>
         <div class="input-area">
-            <input type="text" id="word-input" placeholder="Ingrese palabra">
+            <div id="selected-word"></div>
             <button id="submit-word">Enviar Palabra</button>
         </div>
         <div class="scoreboard">
@@ -47,7 +49,27 @@
             <ul id="word-list"></ul>
             <h3>Puntuación: <span id="score">0</span></h3>
         </div>
+        <button id="show-ranking">Mostrar Ranking</button>
     </div>
+    <div id="ranking-modal">
+        <div id="ranking-content">
+            <h2>Ranking</h2>
+            <button id="close-ranking">Cerrar</button>
+            <table id="ranking-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Puntuación</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenará el ranking con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="message-container" class="message-container"></div>
     <script src="script.js"></script>
 </body>
 </html>
