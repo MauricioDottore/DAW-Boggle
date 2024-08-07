@@ -46,12 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
             timeRemaining--;
             updateTimerDisplay(timeRemaining);
             if (timeRemaining <= 10) {
-                timerDisplay.style.color = '#FF5722'; // Color de alerta
-                // Aquí podrías reproducir un sonido de alerta si lo deseas
+                timerDisplay.style.color = '#FF5722'; //alerta color naranja
             }
             if (timeRemaining <= 0) {
                 clearInterval(timer);
-                timerDisplay.style.color = '#fff'; // Color normal
+                timerDisplay.style.color = '#fff';
                 showMessage('Tiempo terminado');
                 saveGameResult();
             }
@@ -121,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cells.forEach(cell => {
             cell.classList.remove('can-select');
         });
-        // Aquí se pueden agregar reglas para determinar qué celdas pueden ser seleccionadas a continuación
     }
 
     function submitWord() {
@@ -220,4 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cells.forEach(cell => {
         cell.addEventListener('click', selectCell);
     });
+});
+
+document.getElementById('contact-btn').addEventListener('click', () => {
+    window.location.href = 'contacto.html';
 });
