@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeRankingBtn = document.getElementById('close-ranking');
     const rankingTableBody = document.querySelector('#ranking-table tbody');
     const playerNameInput = document.getElementById('player-name');
+    const messageModal = document.getElementById('message-modal');
+    const modalMessage = document.getElementById('modal-message');
+    const closeMessageBtn = document.getElementById('close-message');
     let timer;
     let score = 0;
     let selectedWord = '';
@@ -23,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startBtn.addEventListener('click', () => {
         playerName = playerNameInput.value.trim();
         if (playerName === '') {
-            alert('Por favor, ingresa tu nombre antes de comenzar el juego.');
+            showMessage('Por favor, ingresa tu nombre antes de comenzar el juego.');
         } else {
             resetGame();
             const timeLimit = parseInt(timeSelect.value) * 60;
@@ -35,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitWordBtn.addEventListener('click', submitWord);
     showRankingBtn.addEventListener('click', showRanking);
     closeRankingBtn.addEventListener('click', closeRanking);
+    closeMessageBtn.addEventListener('click', closeMessage);
 
     function startTimer(duration) {
         let timeRemaining = duration;
@@ -48,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (timeRemaining <= 0) {
                 clearInterval(timer);
                 timerDisplay.style.color = '#fff'; // Color normal
-                alert('Tiempo terminado');
+                showMessage('Tiempo terminado');
                 saveGameResult();
             }
         }, 1000);
@@ -139,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateSelectableCells();
                 })
                 .catch(error => {
-                    alert('Palabra no válida');
+                    showMessage('Palabra no válida');
                     selectedWord = '';
                     selectedWordDisplay.textContent = '';
                     selectedCells.forEach(cell => cell.classList.remove('selected', 'last-selected'));
@@ -147,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateSelectableCells();
                 });
         } else {
-            alert('Palabra demasiado corta');
+            showMessage('Palabra demasiado corta');
             selectedWord = '';
             selectedWordDisplay.textContent = '';
             selectedCells.forEach(cell => cell.classList.remove('selected', 'last-selected'));
@@ -202,6 +206,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeRanking() {
         rankingModal.style.display = 'none';
+    }
+
+    function showMessage(message) {
+        modalMessage.textContent = message;
+        messageModal.style.display = 'flex';
+    }
+
+    function closeMessage() {
+        messageModal.style.display = 'none';
     }
 
     cells.forEach(cell => {

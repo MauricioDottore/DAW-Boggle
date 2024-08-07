@@ -152,7 +152,7 @@ button:active {
     border-radius: 10px;
     padding: 20px;
     max-width: 500px;
-    width: 100%;
+    width: 90%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     color: #e0e0e0;
     position: relative;
@@ -167,6 +167,7 @@ button:active {
 #ranking-table th, #ranking-table td {
     padding: 10px;
     text-align: left;
+    border-bottom: 1px solid #444;
 }
 
 #ranking-table th {
@@ -185,15 +186,61 @@ button:active {
     background-color: #ff5722;
     border: none;
     color: #fff;
-    padding: 10px;
+    padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     position: absolute;
     top: 10px;
     right: 10px;
+    transition: background-color 0.3s;
 }
 
 #close-ranking:hover {
+    background-color: #e64a19;
+}
+
+/* Estilos del mensaje modal */
+#message-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #282828;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    color: #e0e0e0;
+    position: relative;
+    text-align: center;
+}
+
+#modal-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#close-message {
+    background-color: #ff5722;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#close-message:hover {
     background-color: #e64a19;
 }
 

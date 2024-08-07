@@ -51,10 +51,10 @@
         </div>
         <button id="show-ranking">Mostrar Ranking</button>
     </div>
-    <div id="ranking-modal">
-        <div id="ranking-content">
+    <div id="ranking-modal" class="modal">
+        <div id="ranking-content" class="modal-content">
             <h2>Ranking</h2>
-            <button id="close-ranking">Cerrar</button>
+            <button id="close-ranking" class="close-btn">Cerrar</button>
             <table id="ranking-table">
                 <thead>
                     <tr>
@@ -69,7 +69,12 @@
             </table>
         </div>
     </div>
-    <div id="message-container" class="message-container"></div>
+    <div id="message-modal" class="modal">
+        <div class="modal-content">
+            <span id="modal-message"></span>
+            <button id="close-message" class="close-btn">Cerrar</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
