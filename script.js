@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
+    const resetBtn = document.getElementById('reset-btn'); // Nuevo botón de reset
     const timeSelect = document.getElementById('time-select');
     const cells = document.querySelectorAll('.cell');
     const submitWordBtn = document.getElementById('submit-word');
@@ -30,12 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage('Por favor, ingresa tu nombre antes de comenzar el juego.');
         } else {
             startBtn.disabled = true; // Deshabilitar el botón "Iniciar juego"
+            resetBtn.disabled = false; // Habilitar el botón "Reiniciar juego"
             resetGame();
             const timeLimit = parseInt(timeSelect.value) * 60;
             startTimer(timeLimit);
             generateGrid();
             isGameStarted = true; // Marcar que el juego ha comenzado
         }
+    });
+
+    resetBtn.addEventListener('click', () => {
+        clearInterval(timer); // Detener el temporizador si está en marcha
+        resetGame(); // Reiniciar el juego
+        startBtn.disabled = false; // Habilitar el botón "Iniciar juego"
+        resetBtn.disabled = true; // Deshabilitar el botón "Reiniciar juego"
+        isGameStarted = false; // Marcar que el juego no está en curso
     });
     
     
@@ -76,6 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    
     function generateGrid() {
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const vowels = 'AEIOU';
@@ -211,7 +223,13 @@ document.addEventListener('DOMContentLoaded', () => {
         rankings.push(result);
         rankings.sort((a, b) => b.score - a.score);
         localStorage.setItem('boggleRankings', JSON.stringify(rankings));
+    
+        // Habilitar el botón "Iniciar juego" nuevamente
+        startBtn.disabled = false;
+        isGameStarted = false; // Marcar que el juego ha terminado
     }
+    
+    
 
     function showRanking() {
         const rankings = JSON.parse(localStorage.getItem('boggleRankings')) || [];
