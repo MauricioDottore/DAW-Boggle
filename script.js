@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageModal = document.getElementById('message-modal');
     const modalMessage = document.getElementById('modal-message');
     const closeMessageBtn = document.getElementById('close-message');
+    let isGameStarted = false; // Variable de control para saber si el juego ha comenzado
     let timer;
     let score = 0;
     let selectedWord = '';
@@ -28,12 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (playerName === '') {
             showMessage('Por favor, ingresa tu nombre antes de comenzar el juego.');
         } else {
+            startBtn.disabled = true; // Deshabilitar el botón "Iniciar juego"
             resetGame();
             const timeLimit = parseInt(timeSelect.value) * 60;
             startTimer(timeLimit);
             generateGrid();
+            isGameStarted = true; // Marcar que el juego ha comenzado
         }
     });
+    
+    
 
     submitWordBtn.addEventListener('click', submitWord);
     showRankingBtn.addEventListener('click', showRanking);
@@ -102,7 +107,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function selectCell(event) {
+        if (!isGameStarted) return; // Asegúrate de que el juego haya comenzado
         const cell = event.target;
+    
+        if (selectedCells.length > 0) {
+            const lastCell = selectedCells[selectedCells.length - 1];
+            const lastIndex = Array.from(cells).indexOf(lastCell);
+            const currentIndex = Array.from(cells).indexOf(cell);
+    
+            const lastRow = Math.floor(lastIndex / 4);
+            const lastCol = lastIndex % 4;
+            const currentRow = Math.floor(currentIndex / 4);
+            const currentCol = currentIndex % 4;
+    
+            const isAdjacent = Math.abs(lastRow - currentRow) <= 1 && Math.abs(lastCol - currentCol) <= 1;
+    
+            if (!isAdjacent) {
+                return; // No permitir la selección si no está adyacente
+            }
+        }
+    
         if (!cell.classList.contains('selected')) {
             if (selectedCells.length > 0) {
                 selectedCells[selectedCells.length - 1].classList.remove('last-selected');
@@ -115,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSelectableCells();
         }
     }
+    
+    
 
     function updateSelectableCells() {
         cells.forEach(cell => {
@@ -222,4 +248,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('contact-btn').addEventListener('click', () => {
     window.location.href = 'contacto.html';
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const board = document.querySelectorAll(".board td");
+    let selectedCells = [];
+    let isGameStarted = false;
+
+    document.getElementById("start-button").addEventListener("click", function () {
+        isGameStarted = true;
+        selectedCells = [];
+        document.getElementById("word-display").textContent = "";
+    });
+
+    board.forEach(cell => {
+        cell.addEventListener("click", function () {
+            if (!isGameStarted) return; // No permitir la selección antes de que empiece el juego
+
+            const [row, col] = this.id.split("-").map(Number);
+
+            if (selectedCells.length > 0) {
+                const lastCell = selectedCells[selectedCells.length - 1];
+                const [lastRow, lastCol] = lastCell.split("-").map(Number);
+
+                const isAdjacent = Math.abs(row - lastRow) <= 1 && Math.abs(col - lastCol) <= 1;
+
+                if (!isAdjacent) {
+                    return; // No permitir la selección si no está adyacente
+                }
+            }
+
+            if (!selectedCells.includes(this.id)) {
+                selectedCells.push(this.id);
+                this.classList.add("selected");
+
+                document.getElementById("word-display").textContent += this.textContent;
+            }
+        });
+    });
 });
